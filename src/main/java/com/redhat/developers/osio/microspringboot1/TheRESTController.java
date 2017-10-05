@@ -23,6 +23,14 @@ public class TheRESTController {
         this.restTemplate = restTemplate;
     }
 
+    @RequestMapping("/cats")
+    @HystrixCommand(fallbackMethod = "topLevelFallback")
+    public String getCats()
+    {
+      System.out.println( "Cats service called.");
+      return "Winnie,Jessie,Murphy,Molly,Dexter,Kali";
+    }
+
     @RequestMapping("/")
     @HystrixCommand(fallbackMethod = "topLevelFallback")
     public String getCustomersWithOrders() {
